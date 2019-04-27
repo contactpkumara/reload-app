@@ -13,7 +13,7 @@
                   <mat-form-field class="full-width">
                     <span style="vertical-align: middle; padding-right: 10px" matPrefix>+94</span>
                     <input matInput [formControl]="reloadForm.controls['phoneNumber']" required name="phone-number"
-                      type="text" placeholder="Phone Number" maxlength="9">
+                      type="text" placeholder="Phone Number" minlength="9" maxlength="9">
                   </mat-form-field>
                 </div>
               </div>

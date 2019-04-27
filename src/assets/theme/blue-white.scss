@@ -34,3 +34,7 @@ $custom-theme: mat-light-theme($custom-primary, $custom-accent, $custom-warn);
     font-size: 12px;
     margin-bottom: 0px !important;
 }
+
+.example-sidenav-container .mat-drawer-inner-container {
+    width: 200px;
+}

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { MediaMatcher } from '@angular/cdk/layout';
+import * as XLSX from 'xlsx';
+import { ExcelService } from '../../services/excel.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -13,11 +16,28 @@ export class DashboardLayoutComponent implements OnInit {
   public dashboard = false;
   public mobile = false;
   public dth = false;
+  public mobileQuery: MediaQueryList;
+  private mobileQueryListener: () => void;
+  public shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  public elements: any = [];
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private excelService: ExcelService
+    ) {
+      this.mobileQuery = media.matchMedia('(max-width: 600px)');
+      this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+      this.mobileQuery.addListener(this.mobileQueryListener);
+    }
 
   ngOnInit() {
     this.changeActiveClass();
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 
   changeActiveClass() {
@@ -41,6 +61,23 @@ export class DashboardLayoutComponent implements OnInit {
         this.dth = true;
       }
     }
+  }
+
+  exportReport() {
+    for (let i = 1; i <= 15; i++) {
+      this.elements.push(
+        {
+          description: i.toString(),
+          type: 'type ' + i,
+          amount: 'amount ' + i,
+          balance: 'balance ' + i,
+          remarks: 'remarks' + i,
+          user: 'user' + i,
+          dateTime: new Date()
+        }
+      );
+    }
+    this.excelService.exportAsExcelFile(this.elements, 'monthly-report');
   }
 
 }

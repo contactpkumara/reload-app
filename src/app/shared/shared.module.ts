@@ -27,6 +27,7 @@ import {
 import { AppLoaderComponent } from './services/app-loader/app-loader.component';
 import { AppLoaderService } from './services/app-loader/app-loader.service';
 import { RoutePartsService } from './services/route-parts.service';
+import { ExcelService } from './services/excel.service';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { RoutePartsService } from './services/route-parts.service';
   ],
   providers: [
     AppLoaderService,
-    RoutePartsService
+    RoutePartsService,
+    ExcelService
   ],
   declarations: [
       AppLoaderComponent

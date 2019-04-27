@@ -36,23 +36,23 @@ export class SigninComponent implements OnInit {
 
   signin() {
     console.log(this.signinForm.value);
-    this.loader.open('Loading');
-    this.sessionService.signin(this.signinForm.value)
-      .subscribe(response => {
-        console.log(response);
-        this.loader.close();
+    // this.loader.open('Loading');
+    // this.sessionService.signin(this.signinForm.value)
+    //   .subscribe(response => {
+    //     console.log(response);
+    //     this.loader.close();
         this.router.navigate([this.successUrl]);
-      },
-      error => {
-        this.loader.close();
-        if (error.status === 500) {
-          this.snackBar.open(
-            'Somthing went wrong. Please try again!',
-            'close',
-            { duration: 3000 }
-          );
-        }
-      });
+      // },
+      // error => {
+      //   this.loader.close();
+      //   if (error.status === 500) {
+      //     this.snackBar.open(
+      //       'Somthing went wrong. Please try again!',
+      //       'close',
+      //       { duration: 3000 }
+      //     );
+      //   }
+      // });
   }
 
 }

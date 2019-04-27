@@ -20,9 +20,9 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
-  elements: any = [];
-  previous: any = [];
-  headElements = ['Description', 'Type', 'Amount', 'Balance', 'Remarks', 'User', 'Date Time'];
+  public elements: any = [];
+  public previous: any = [];
+  public headElements = ['Description', 'Type', 'Amount', 'Balance', 'Remarks', 'User', 'Date Time'];
 
   constructor(private cdRef: ChangeDetectorRef) { }
 

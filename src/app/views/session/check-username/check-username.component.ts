@@ -36,27 +36,27 @@ export class CheckUsernameComponent implements OnInit {
 
   checkUserName() {
     console.log(this.checkUserNameForm.value);
-    this.loader.open('Loading');
-    this.sessionService.checkUserName(this.checkUserNameForm.value)
-      .subscribe(response => {
-        this.loader.close();
-        if (response.retFlag === '0') {
-          console.log(response);
+    // this.loader.open('Loading');
+    // this.sessionService.checkUserName(this.checkUserNameForm.value)
+    //   .subscribe(response => {
+    //     this.loader.close();
+    //     if (response.retFlag === '0') {
+    //       console.log(response);
           this.router.navigate([this.successUrl]);
-        } else {
-          this.errorMessage = response.retMsg;
-        }
-      },
-      error => {
-        this.loader.close();
-        if (error.status === 500) {
-          this.snackBar.open(
-            'Somthing went wrong. Please try again!',
-            'close',
-            { duration: 3000 }
-          );
-        }
-      });
+      //   } else {
+      //     this.errorMessage = response.retMsg;
+      //   }
+      // },
+      // error => {
+      //   this.loader.close();
+      //   if (error.status === 500) {
+      //     this.snackBar.open(
+      //       'Somthing went wrong. Please try again!',
+      //       'close',
+      //       { duration: 3000 }
+      //     );
+      //   }
+      // });
   }
 
 }
