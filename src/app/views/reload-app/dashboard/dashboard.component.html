@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+                <thead>
+                    <tr>
+                        <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let el of elements; let i = index">
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.description}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.type}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.amount}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.balance}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.remarks}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.user}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.dateTime}}</td>
+                    </tr>
+                </tbody>
+                <tfoot class="grey lighten-5 w-100">
+                    <tr>
+                        <td colspan="4">
+                        <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

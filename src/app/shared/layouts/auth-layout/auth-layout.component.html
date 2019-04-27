@@ -1,0 +1,45 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark nav-primary" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Reload App</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="user"></mdb-icon> SignUp<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+<div class="back-img" [style.height.px]="myInnerHeight" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+  <div fxFlex="40">
+    <mat-card>
+      <mat-card-content>
+        <router-outlet></router-outlet>
+        <!-- <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+          <div fxFlex="50">
+            <router-outlet></router-outlet>
+          </div>
+          <div fxFlex="50">
+            <mdb-carousel [animation]="'slide'">
+              <mdb-carousel-item>
+                <img class="d-block w-100" src="./assets/images/secure-recharge.png" alt="First slide">
+              </mdb-carousel-item>
+              <mdb-carousel-item>
+                <img class="d-block w-100" src="./assets/images/secure-recharge.png" alt="Second slide">
+              </mdb-carousel-item>
+            </mdb-carousel>
+          </div>
+        </div> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

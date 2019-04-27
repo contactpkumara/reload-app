@@ -1,0 +1,63 @@
+<!--Navbar-->
+<mdb-navbar id="top-bar" SideClass="navbar navbar-expand-sm navbar-dark nav-primary" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <links>
+    <span class="navbar-text white-text">
+      {{ adminMsg }}
+    </span>
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbTooltip="Like Us on Facebook" placement="bottom" mdbWavesEffect>
+          <mdb-icon fab icon="facebook"></mdb-icon>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbTooltip="Follow Us on Twitter" placement="bottom" mdbWavesEffect>
+          <mdb-icon fab icon="twitter"></mdb-icon>
+        </a>
+      </li>
+    </ul>
+  </links>
+
+</mdb-navbar>
+<!--/.Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white sticky-top" [containerInside]="true">
+    <mdb-navbar-brand>
+        <a class="navbar-brand" routerLink="/reload-app/dashboard">Navbar</a>
+    </mdb-navbar-brand>
+    <!-- Collapsible content -->
+  <links>
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" (click)="changeActiveClass()" [class.active]="dashboard">
+            <a class="nav-link waves-light" routerLink="/reload-app/dashboard" mdbWavesEffect>Dashboard<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" (click)="changeActiveClass()" [class.active]="mobile">
+            <a class="nav-link waves-light" routerLink="/reload-app/mobile" mdbWavesEffect>Mobile</a>
+        </li>
+        <li class="nav-item" (click)="changeActiveClass()" [class.active]="dth">
+            <a class="nav-link waves-light" mdbWavesEffect>DTH</a>
+        </li>
+    </ul>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item mt-6">
+            <a class="nav-link">Rs. {{ balance }}</a>
+        </li>
+        <li class="nav-item avatar dropdown" mdbDropdown>
+            <a mdbDropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="Profile Image" class="img-fluid rounded-circle z-depth-0"></a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                <a class="dropdown-item waves-light" mdbWavesEffect>My account</a>
+                <a class="dropdown-item waves-light" mdbWavesEffect >Sign out</a>
+            </div>
+        </li>
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+</mdb-navbar>
+<router-outlet></router-outlet>
