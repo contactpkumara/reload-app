@@ -38,6 +38,14 @@
                   </mat-form-field>
                 </div>
               </div>
+              <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <mat-radio-group [formControl]="reloadForm.controls['type']" class="full-width" aria-label="Select an option">
+                    <mat-radio-button value="1">TopUp</mat-radio-button>
+                    <mat-radio-button  style="padding-left: 50px;" value="2">Stv</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
             </form>
           </mat-card-content>
           <mat-card-actions class="mb-1">

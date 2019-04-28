@@ -10,6 +10,9 @@ import {
   MdbTablePaginationComponent,
   MdbTableDirective
 } from 'angular-bootstrap-md';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { ExcelService } from 'src/app/shared/services/excel.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,11 +26,38 @@ export class DashboardComponent implements OnInit {
   public elements: any = [];
   public previous: any = [];
   public headElements = ['Description', 'Type', 'Amount', 'Balance', 'Remarks', 'User', 'Date Time'];
+  public searchForm: FormGroup;
 
-  constructor(private cdRef: ChangeDetectorRef) { }
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private excelService: ExcelService
+    ) { }
 
   ngOnInit() {
-    for (let i = 1; i <= 15; i++) {
+    this.buildSearchForm();
+    this.searchResult(20);
+  }
+
+  ngAfterViewInit() {
+    this.mdbTablePagination.setMaxVisibleItemsNumberTo(15);
+    this.mdbTablePagination.calculateFirstItemIndex();
+    this.mdbTablePagination.calculateLastItemIndex();
+    this.cdRef.detectChanges();
+  }
+
+  buildSearchForm() {
+    this.searchForm = this.fb.group({
+      transType: ['', Validators.required],
+      fromDate: ['', Validators.required],
+      toDate: ['', Validators.required]
+    });
+  }
+
+  searchResult(ele = 50) {
+    this.elements = [];
+    for (let i = 1; i <= ele; i++) {
       this.elements.push(
         {
           description: i.toString(),
@@ -45,11 +75,8 @@ export class DashboardComponent implements OnInit {
     this.previous = this.mdbTable.getDataSource();
   }
 
-  ngAfterViewInit() {
-    this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
-    this.mdbTablePagination.calculateFirstItemIndex();
-    this.mdbTablePagination.calculateLastItemIndex();
-    this.cdRef.detectChanges();
+  exportXlxs() {
+    this.excelService.exportAsExcelFile(this.elements, 'report');
   }
 
 }

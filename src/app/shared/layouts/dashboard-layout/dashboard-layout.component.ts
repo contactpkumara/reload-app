@@ -19,7 +19,6 @@ export class DashboardLayoutComponent implements OnInit {
   public mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
   public shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-  public elements: any = [];
 
   constructor(
     private router: Router,
@@ -61,23 +60,6 @@ export class DashboardLayoutComponent implements OnInit {
         this.dth = true;
       }
     }
-  }
-
-  exportReport() {
-    for (let i = 1; i <= 15; i++) {
-      this.elements.push(
-        {
-          description: i.toString(),
-          type: 'type ' + i,
-          amount: 'amount ' + i,
-          balance: 'balance ' + i,
-          remarks: 'remarks' + i,
-          user: 'user' + i,
-          dateTime: new Date()
-        }
-      );
-    }
-    this.excelService.exportAsExcelFile(this.elements, 'monthly-report');
   }
 
 }

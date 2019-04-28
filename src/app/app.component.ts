@@ -10,7 +10,7 @@ import { RoutePartsService } from './shared/services/route-parts.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public appTitle = 'CP Authentica';
+  public appTitle = '';
   public pageTitle = '';
 
   constructor(
@@ -31,7 +31,7 @@ export class AppComponent {
         const routeParts = this.routePartsService.generateRouteParts(
           this.activeRoute.snapshot
         );
-        if (!routeParts.length) {return this.title.setTitle(this.appTitle);}
+        if (!routeParts.length) { return this.title.setTitle(this.appTitle); }
         // Extract title from parts;
         this.pageTitle = routeParts
           .reverse()

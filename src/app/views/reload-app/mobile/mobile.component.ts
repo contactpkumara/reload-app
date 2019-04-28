@@ -24,11 +24,13 @@ export class MobileComponent implements OnInit {
     this.reloadForm = this.fb.group({
       phoneNumber: ['', Validators.required],
       operator: ['', Validators.required],
-      ammount: ['', Validators.required]
+      ammount: ['', Validators.required],
+      type: ['', Validators.required]
     });
   }
 
   recharge() {
+    console.log(this.reloadForm.value);
     this.snackBar.open(
       'Successfully Recharge : Rs.' + this.reloadForm.value.ammount + ' to +94' + this.reloadForm.value.phoneNumber,
       'close',

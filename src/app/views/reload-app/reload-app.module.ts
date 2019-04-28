@@ -15,7 +15,10 @@ import {
   MatCheckboxModule,
   MatIconModule,
   MatSelectModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatRadioModule
 } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
@@ -44,6 +47,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     IconsModule,
     DropdownModule,
     TableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
     RouterModule.forChild(ReloadAppRoute)
   ]
 })
