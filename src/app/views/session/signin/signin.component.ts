@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SessionService } from '../session.service';
 import { MatSnackBar } from '@angular/material';
 import { AppLoaderService } from 'src/app/shared/services/app-loader/app-loader.service';
@@ -14,22 +14,27 @@ export class SigninComponent implements OnInit {
 
   public signinForm: FormGroup;
   public successUrl = 'reload-app/dashboard';
+  public userName;
 
   constructor(
     private fb: FormBuilder,
     private sessionService: SessionService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private loader: AppLoaderService
+    private loader: AppLoaderService,
+    private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.activeRoute.queryParams.subscribe(params => {
+      this.userName = params['userName'];
+    });
     this.buildSignifForm();
   }
 
   buildSignifForm() {
     this.signinForm = this.fb.group({
-      username: ['', Validators.required],
+      username: [this.userName, Validators.required],
       password: ['', Validators.required]
     });
   }
