@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   public searchForm: FormGroup;
   private fromDate = new Date();
   private toDate = new Date();
+  public userObj = JSON.parse(localStorage.getItem('userObj'));
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -47,12 +48,11 @@ export class DashboardComponent implements OnInit {
     this.toDate.setDate(this.toDate.getDate() - 30);
     const frDate = this.datePipe.transform(this.fromDate, 'yyyy-MM-dd');
     const tDate = this.datePipe.transform(this.toDate, 'yyyy-MM-dd');
-    const userObj = JSON.parse(localStorage.getItem('userObj'));
     const searchObj = {
-      userId: userObj.loginEmployeeId,
+      userId: this.userObj.loginEmployeeId,
       transType: 3,
-      fromDate: frDate,
-      toDate: tDate
+      fromDate: tDate,
+      toDate: frDate
     }
     this.buildSearchForm();
     this.searchResult(searchObj);
@@ -81,6 +81,7 @@ export class DashboardComponent implements OnInit {
       this.loader.open('Loading');
       searchObj = this.searchForm.value;
     }
+    searchObj['userId'] = this.userObj.loginEmployeeId;
     this.reloadAppService.getAccountStatement(searchObj)
       .subscribe(response => {
         this.createJsonArray(response);
@@ -101,11 +102,11 @@ export class DashboardComponent implements OnInit {
       const data = {
         description: element[1],
         type: element[2],
-        amount: element[3],
-        balance: element[4],
-        remarks: element[5],
-        user: element[6],
-        dateTime: element[7]
+        amount: element[4],
+        balance: element[5],
+        remarks: element[6],
+        user: element[7],
+        dateTime: element[8]
       };
       this.elements.push(data);
     });
