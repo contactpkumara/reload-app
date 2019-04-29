@@ -13,6 +13,9 @@ import {
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ExcelService } from 'src/app/shared/services/excel.service';
+import { DatePipe } from '@angular/common';
+import { ReloadAppService } from '../reload-app.service';
+import { AppLoaderService } from 'src/app/shared/services/app-loader/app-loader.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,17 +30,32 @@ export class DashboardComponent implements OnInit {
   public previous: any = [];
   public headElements = ['Description', 'Type', 'Amount', 'Balance', 'Remarks', 'User', 'Date Time'];
   public searchForm: FormGroup;
+  private fromDate = new Date();
+  private toDate = new Date();
 
   constructor(
     private cdRef: ChangeDetectorRef,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    private datePipe: DatePipe,
+    private reloadAppService: ReloadAppService,
+    private loader: AppLoaderService
     ) { }
 
   ngOnInit() {
+    this.toDate.setDate(this.toDate.getDate() - 30);
+    const frDate = this.datePipe.transform(this.fromDate, 'yyyy-MM-dd');
+    const tDate = this.datePipe.transform(this.toDate, 'yyyy-MM-dd');
+    const userObj = JSON.parse(localStorage.getItem('userObj'));
+    const searchObj = {
+      userId: userObj.loginEmployeeId,
+      transType: 3,
+      fromDate: frDate,
+      toDate: tDate
+    }
     this.buildSearchForm();
-    this.searchResult(20);
+    this.searchResult(searchObj);
   }
 
   ngAfterViewInit() {
@@ -55,28 +73,45 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  searchResult(ele = 50) {
+  searchResult(searchObj: any = false) {
     this.elements = [];
-    for (let i = 1; i <= ele; i++) {
-      this.elements.push(
-        {
-          description: i.toString(),
-          type: 'type ' + i,
-          amount: 'amount ' + i,
-          balance: 'balance ' + i,
-          remarks: 'remarks' + i,
-          user: 'user' + i,
-          dateTime: new Date()
-        });
+    if (searchObj) {
+      searchObj = searchObj;
+    } else {
+      this.loader.open('Loading');
+      searchObj = this.searchForm.value;
     }
-
-    this.mdbTable.setDataSource(this.elements);
-    this.elements = this.mdbTable.getDataSource();
-    this.previous = this.mdbTable.getDataSource();
+    this.reloadAppService.getAccountStatement(searchObj)
+      .subscribe(response => {
+        this.createJsonArray(response);
+        this.loader.close();
+      },
+      error => {
+        this.loader.close();
+        console.log(error);
+      });
   }
 
   exportXlxs() {
     this.excelService.exportAsExcelFile(this.elements, 'report');
+  }
+
+  createJsonArray(dataArray) {
+    dataArray.forEach(element => {
+      const data = {
+        description: element[1],
+        type: element[2],
+        amount: element[3],
+        balance: element[4],
+        remarks: element[5],
+        user: element[6],
+        dateTime: element[7]
+      };
+      this.elements.push(data);
+    });
+    this.mdbTable.setDataSource(this.elements);
+    this.elements = this.mdbTable.getDataSource();
+    this.previous = this.mdbTable.getDataSource();
   }
 
 }

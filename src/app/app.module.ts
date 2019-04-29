@@ -18,6 +18,7 @@ import {
 } from 'angular-bootstrap-md';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
+import { SharedService } from './shared/shared.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { SharedModule } from './shared/shared.module';
     CarouselModule.forRoot(),
     SharedModule
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,7 +13,7 @@ import { AppLoaderService } from 'src/app/shared/services/app-loader/app-loader.
 export class SigninComponent implements OnInit {
 
   public signinForm: FormGroup;
-  public successUrl = 'reload-app/dashboard';
+  public successUrl = 'reload-app/mobile';
   public userName;
 
   constructor(
@@ -41,23 +41,38 @@ export class SigninComponent implements OnInit {
 
   signin() {
     console.log(this.signinForm.value);
-    // this.loader.open('Loading');
-    // this.sessionService.signin(this.signinForm.value)
-    //   .subscribe(response => {
-    //     console.log(response);
-    //     this.loader.close();
-        this.router.navigate([this.successUrl]);
-      // },
-      // error => {
-      //   this.loader.close();
-      //   if (error.status === 500) {
-      //     this.snackBar.open(
-      //       'Somthing went wrong. Please try again!',
-      //       'close',
-      //       { duration: 3000 }
-      //     );
-      //   }
-      // });
+    this.loader.open('Loading');
+    this.sessionService.signin(this.signinForm.value)
+      .subscribe(response => {
+        console.log(response.username);
+        this.sessionService.getUserTaskList(response.loginEmployeeId)
+        .subscribe(res => {
+          localStorage.setItem('userObj', JSON.stringify(response));
+          localStorage.setItem('taskList', JSON.stringify(res));
+          this.loader.close();
+          this.router.navigate([this.successUrl]);
+        },
+        err => {
+          this.loader.close();
+          if (err.status === 500) {
+            this.snackBar.open(
+              'Somthing went wrong. Please try again!',
+              'close',
+              { duration: 3000 }
+            );
+          }
+        });
+      },
+      error => {
+        this.loader.close();
+        if (error.status === 500) {
+          this.snackBar.open(
+            'Somthing went wrong. Please try again!',
+            'close',
+            { duration: 3000 }
+          );
+        }
+      });
   }
 
 }

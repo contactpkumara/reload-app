@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import {
   CarouselModule,
   NavbarModule,
@@ -26,6 +26,7 @@ import { ReloadAppRoute } from './reload-app-route';
 import { MobileComponent } from './mobile/mobile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReloadAppService } from './reload-app.service';
 
 @NgModule({
   declarations: [DashboardComponent, MobileComponent],
@@ -51,6 +52,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatNativeDateModule,
     MatRadioModule,
     RouterModule.forChild(ReloadAppRoute)
-  ]
+  ],
+  providers: [ReloadAppService, DatePipe]
 })
 export class ReloadAppModule { }

@@ -17,9 +17,9 @@ export class SessionService {
 
   constructor(private http: HttpClient) { }
 
-  public checkUserName(checkUserNameData: checkUserNameData) {
+  public checkUserName(userName: checkUserNameData) {
     return this.http
-      .post<any>(this.sessionUrl + 'chkusername' , checkUserNameData)
+      .post<any>(this.sessionUrl + 'chkusername' , userName)
       .pipe(
         map(data => {
           return data;
@@ -28,15 +28,31 @@ export class SessionService {
       );
   }
 
-  public signin(signinData: signinData) {
+  public signin(userData: signinData) {
     return this.http
-      .post<any>(this.sessionUrl, signinData)
+      .post<any>(this.sessionUrl, userData)
       .pipe(
         map(data => {
           return data;
         }),
         catchError(this.handleError)
       );
+  }
+
+  getUserTaskList(userId) {
+    return this.http
+      .post<any>(this.sessionUrl + 'getUserTaskList', userId)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  public signOut() {
+    localStorage.removeItem('userObj');
+    localStorage.removeItem('taskList');
   }
 
   private handleError(error: HttpErrorResponse | any) {
