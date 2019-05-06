@@ -28,7 +28,7 @@ export class BankAccStatementComponent implements OnInit {
   @ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
   public elements: any = [];
   public previous: any = [];
-  public headElements = ['Description', 'Type', 'Amount', 'Balance', 'Remarks', 'User', 'Date Time'];
+  public headElements = ['Date Time', 'User', 'Description', 'Credit', 'Debit', 'Amount', 'Balance', 'Remarks'];
   public searchForm: FormGroup;
   private fromDate = new Date();
   private toDate = new Date();
@@ -84,8 +84,13 @@ export class BankAccStatementComponent implements OnInit {
     searchObj['userId'] = this.userObj.loginEmployeeId;
     this.reloadAppService.getAccountStatement(searchObj)
       .subscribe(response => {
-        this.createJsonArray(response);
-        this.loader.close();
+        console.log(response);
+        // this.createJsonArray(response);
+        // this.loader.close();
+        this.elements = response;
+        this.mdbTable.setDataSource(this.elements);
+        this.elements = this.mdbTable.getDataSource();
+        this.previous = this.mdbTable.getDataSource();
       },
       error => {
         this.loader.close();

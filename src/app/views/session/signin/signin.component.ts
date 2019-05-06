@@ -47,6 +47,8 @@ export class SigninComponent implements OnInit {
         console.log(response.username);
         this.sessionService.getUserTaskList(response.loginEmployeeId)
         .subscribe(res => {
+          console.log('taskList');
+          console.log(res);
           localStorage.setItem('userObj', JSON.stringify(response));
           localStorage.setItem('taskList', JSON.stringify(res));
           this.loader.close();

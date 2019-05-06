@@ -1,0 +1,22 @@
+.back-img {
+    background-image: url('./../../../../assets/images/main-bg.jpg');
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mlr-16 {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+}
+
+.mt-signin {
+    margin-top: 5rem !important;
+}
+
+.text-center {
+    justify-content: center;
+}
