@@ -99,7 +99,7 @@ export class DashboardLayoutComponent implements OnInit {
       if (element[2] === 'Mobile Recharge') {
         jsonTask.url = '/reload-app/mobile';
       } else if (element[2] === 'Bank Account Statement') {
-        jsonTask.url = '/reload-app/dashboard';
+        jsonTask.url = '/reload-app/bank-acc-stmnt';
       } else {
         jsonTask.url = '/session/404';
       }
