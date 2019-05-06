@@ -18,11 +18,11 @@ import { ReloadAppService } from '../reload-app.service';
 import { AppLoaderService } from 'src/app/shared/services/app-loader/app-loader.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-bank-acc-statement',
+  templateUrl: './bank-acc-statement.component.html',
+  styleUrls: ['./bank-acc-statement.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class BankAccStatementComponent implements OnInit {
 
   @ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
