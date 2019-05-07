@@ -18,7 +18,8 @@ import {
   MatSnackBarModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatRadioModule
+  MatRadioModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ReloadAppRoute } from './reload-app-route';
@@ -53,6 +54,7 @@ import { FundTransferComponent } from './fund-transfer/fund-transfer.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
+    MatAutocompleteModule,
     RouterModule.forChild(ReloadAppRoute)
   ],
   providers: [ReloadAppService, DatePipe]

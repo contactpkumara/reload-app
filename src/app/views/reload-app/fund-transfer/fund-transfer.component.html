@@ -11,12 +11,12 @@
               <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
                 <div fxFlex="100">
                   <mat-form-field class="full-width">
-                    <mat-select required placeholder="Choose User" [formControl]="fundTransferForm.controls['benificiaryId']">
-                      <mat-option *ngFor="let sp of spList;" value="{{ sp.id }}">{{ sp.name }}</mat-option>
-                      <!-- <mat-option value="Dialog">Dialog</mat-option>
-                      <mat-option value="Hutch">Hutch</mat-option>
-                      <mat-option value="Airtel">Airtel</mat-option> -->
-                    </mat-select>
+                    <input type="text" placeholder="Select User" aria-label="Assignee" matInput [formControl]="fundTransferForm.controls['benificiaryId']" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn()">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
+                        {{option.userName}}
+                      </mat-option>
+                    </mat-autocomplete>
                   </mat-form-field>
                 </div>
               </div>
@@ -33,7 +33,7 @@
                 <div fxFlex="100">
                   <mat-form-field class="full-width">
                     <input matInput [formControl]="fundTransferForm.controls['remarks']" required name="remarks"
-                      type="text" placeholder="Remarks" minlength="9" maxlength="9">
+                      type="text" placeholder="Remarks">
                   </mat-form-field>
                 </div>
               </div>
@@ -42,7 +42,7 @@
           <mat-card-actions class="mb-1">
             <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
                 <div fxFlex="100">
-                  <button mat-raised-button color="primary" [disabled]="fundTransferForm.invalid" (click)="recharge()" style="width: 100%;">Recharge</button>
+                  <button mat-raised-button color="primary" [disabled]="fundTransferForm.invalid" (click)="fundTransfer()" style="width: 100%;">Transfer</button>
                 </div>
             </div>
           </mat-card-actions>

@@ -68,6 +68,17 @@ export class ReloadAppService {
       );
   }
 
+  getUserList(userId) {
+    return this.http
+      .post<any>(this.baseUrl + 'report/getUserList', userId)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse | any) {
     return throwError(error);
   }
