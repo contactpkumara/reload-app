@@ -63,10 +63,10 @@
                             Debit
                             <mdb-icon fas icon="sort"></mdb-icon>
                         </th>
-                        <th [mdbTableSort]="elements" sortBy="transactionAmount">
+                        <!-- <th [mdbTableSort]="elements" sortBy="transactionAmount">
                             Amount
                             <mdb-icon fas icon="sort"></mdb-icon>
-                        </th>
+                        </th> -->
                         <th [mdbTableSort]="elements" sortBy="balance">
                             Balance
                             <mdb-icon fas icon="sort"></mdb-icon>
@@ -84,7 +84,7 @@
                       <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionDesc}}</td>
                       <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.credit}}</td>
                       <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.debit}}</td>
-                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionAmount}}</td>
+                      <!-- <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionAmount}}</td> -->
                       <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.balance}}</td>
                       <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.remarks}}</td>
                   </tr>
