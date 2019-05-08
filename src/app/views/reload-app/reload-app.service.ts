@@ -48,7 +48,7 @@ export class ReloadAppService {
 
   dthReload(reloadData: relData) {
     return this.http
-      .post<any>(this.baseUrl + 'topup/dodthrechargepup', reloadData)
+      .post<any>(this.baseUrl + 'topup/dodthrecharge', reloadData)
       .pipe(
         map(data => {
           return data;

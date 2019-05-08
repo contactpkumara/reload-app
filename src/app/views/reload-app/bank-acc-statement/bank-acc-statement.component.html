@@ -43,8 +43,38 @@
           <table mdbTable #tableEl="mdbTable" class="z-depth-1">
               <thead>
                   <tr>
-                      <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
-                      </th>
+                        <th [mdbTableSort]="elements" sortBy="transactionDateTime">
+                            Date Time
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="transactionDoneUser">
+                            User
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="transactionDesc">
+                            Description
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="credit">
+                            Credit
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="debit">
+                            Debit
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="transactionAmount">
+                            Amount
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="balance">
+                            Balance
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="remarks">
+                            Remarks
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
                   </tr>
               </thead>
               <tbody>
