@@ -18,17 +18,17 @@ import { ReloadAppService } from '../reload-app.service';
 import { AppLoaderService } from 'src/app/shared/services/app-loader/app-loader.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-bank-acc-statement',
+  templateUrl: './bank-acc-statement.component.html',
+  styleUrls: ['./bank-acc-statement.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class BankAccStatementComponent implements OnInit {
 
   @ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
   public elements: any = [];
   public previous: any = [];
-  public headElements = ['Description', 'Type', 'Amount', 'Balance', 'Remarks', 'User', 'Date Time'];
+  public headElements = ['Date Time', 'User', 'Description', 'Credit', 'Debit', 'Amount', 'Balance', 'Remarks'];
   public searchForm: FormGroup;
   private fromDate = new Date();
   private toDate = new Date();
@@ -84,8 +84,13 @@ export class DashboardComponent implements OnInit {
     searchObj['userId'] = this.userObj.loginEmployeeId;
     this.reloadAppService.getAccountStatement(searchObj)
       .subscribe(response => {
-        this.createJsonArray(response);
-        this.loader.close();
+        console.log(response);
+        // this.createJsonArray(response);
+        // this.loader.close();
+        this.elements = response;
+        this.mdbTable.setDataSource(this.elements);
+        this.elements = this.mdbTable.getDataSource();
+        this.previous = this.mdbTable.getDataSource();
       },
       error => {
         this.loader.close();

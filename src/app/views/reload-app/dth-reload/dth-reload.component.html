@@ -1,0 +1,72 @@
+<div class="back-img">
+  <div class="container">
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <mat-card>
+          <mat-card-header class="text-center" color="primary">
+            <mat-card-title class="ml-0 text-center">DTH Recharge</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="mt-2">
+            <form [formGroup]="reloadForm">
+              <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <mat-form-field class="full-width">
+                    <span style="vertical-align: middle; padding-right: 10px" matPrefix>+94</span>
+                    <input matInput [formControl]="reloadForm.controls['customermobno']" required name="phone-number"
+                      type="text" placeholder="Phone Number" minlength="9" maxlength="9">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <mat-form-field class="full-width">
+                    <mat-select required placeholder="Choose Operator" [formControl]="reloadForm.controls['serviceoperatorid']">
+                      <mat-option *ngFor="let sp of spList;" value="{{ sp.id }}">{{ sp.name }}</mat-option>
+                      <!-- <mat-option value="Dialog">Dialog</mat-option>
+                      <mat-option value="Hutch">Hutch</mat-option>
+                      <mat-option value="Airtel">Airtel</mat-option> -->
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <mat-form-field class="full-width">
+                    <span style="vertical-align: middle; padding-right: 10px" matPrefix>&#8360;</span>
+                    <input matInput [formControl]="reloadForm.controls['amount']" required name="ammount"
+                      type="text" placeholder="Enter Recharge Amount" maxlength="4" >
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <mat-radio-group [formControl]="reloadForm.controls['stvtype']" class="full-width" aria-label="Select an option">
+                    <mat-radio-button value="1">TopUp</mat-radio-button>
+                    <mat-radio-button  style="padding-left: 50px;" value="2">Stv</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+          <mat-card-actions class="mb-1">
+            <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <button mat-raised-button color="primary" [disabled]="reloadForm.invalid" (click)="recharge()" style="width: 100%;">Recharge</button>
+                </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-md-8">
+        <mdb-carousel [animation]="'slide'">
+          <mdb-carousel-item>
+            <img class="d-block w-100" src="./assets/images/secure-recharge.png" alt="First slide">
+          </mdb-carousel-item>
+          <mdb-carousel-item>
+            <img class="d-block w-100" src="./assets/images/secure-recharge.png" alt="Second slide">
+          </mdb-carousel-item>
+        </mdb-carousel>
+      </div>
+    </div>
+  </div>
+</div>

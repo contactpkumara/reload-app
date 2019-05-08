@@ -1,0 +1,63 @@
+<div class="back-img">
+  <div class="container">
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <mat-card>
+          <mat-card-header class="text-center" color="primary">
+            <mat-card-title class="ml-0 text-center">Fund Transfer</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="mt-2">
+            <form [formGroup]="fundTransferForm">
+              <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <mat-form-field class="full-width">
+                    <input type="text" placeholder="Select User" aria-label="Assignee" matInput [formControl]="fundTransferForm.controls['benificiaryId']" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn()">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
+                        {{option.userName}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <mat-form-field class="full-width">
+                    <span style="vertical-align: middle; padding-right: 10px" matPrefix>&#8360;</span>
+                    <input matInput [formControl]="fundTransferForm.controls['amount']" required name="ammount"
+                      type="text" placeholder="Enter Transfer Amount" maxlength="4" >
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <mat-form-field class="full-width">
+                    <input matInput [formControl]="fundTransferForm.controls['remarks']" required name="remarks"
+                      type="text" placeholder="Remarks">
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+          <mat-card-actions class="mb-1">
+            <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <button mat-raised-button color="primary" [disabled]="fundTransferForm.invalid" (click)="fundTransfer()" style="width: 100%;">Transfer</button>
+                </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-md-8">
+        <mdb-carousel [animation]="'slide'">
+          <mdb-carousel-item>
+            <img class="d-block w-100" src="./assets/images/secure-recharge.png" alt="First slide">
+          </mdb-carousel-item>
+          <mdb-carousel-item>
+            <img class="d-block w-100" src="./assets/images/secure-recharge.png" alt="Second slide">
+          </mdb-carousel-item>
+        </mdb-carousel>
+      </div>
+    </div>
+  </div>
+</div>

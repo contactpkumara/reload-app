@@ -46,6 +46,39 @@ export class ReloadAppService {
       );
   }
 
+  dthReload(reloadData: relData) {
+    return this.http
+      .post<any>(this.baseUrl + 'topup/dodthrecharge', reloadData)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  fundTransfer(fundTransData: ftData) {
+    return this.http
+      .post<any>(this.baseUrl + 'fundtransfer', fundTransData)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  getUserList(userId) {
+    return this.http
+      .post<any>(this.baseUrl + 'report/getUserList', userId)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse | any) {
     return throwError(error);
   }
@@ -70,5 +103,12 @@ export interface relData {
   serviceoperatorid: string;
   amount: string;
   stvtype: string;
+  userid: string;
+}
+
+export interface ftData {
+  benificiaryId: string;
+  amount: string;
+  remarks: string;
   userid: string;
 }

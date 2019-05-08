@@ -18,18 +18,21 @@ import {
   MatSnackBarModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatRadioModule
+  MatRadioModule,
+  MatAutocompleteModule
 } from '@angular/material';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { ReloadAppRoute } from './reload-app-route';
 import { MobileComponent } from './mobile/mobile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReloadAppService } from './reload-app.service';
+import { DthReloadComponent } from './dth-reload/dth-reload.component';
+import { BankAccStatementComponent } from './bank-acc-statement/bank-acc-statement.component';
+import { FundTransferComponent } from './fund-transfer/fund-transfer.component';
 
 @NgModule({
-  declarations: [DashboardComponent, MobileComponent],
+  declarations: [MobileComponent, DthReloadComponent, BankAccStatementComponent, FundTransferComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -51,6 +54,7 @@ import { ReloadAppService } from './reload-app.service';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
+    MatAutocompleteModule,
     RouterModule.forChild(ReloadAppRoute)
   ],
   providers: [ReloadAppService, DatePipe]

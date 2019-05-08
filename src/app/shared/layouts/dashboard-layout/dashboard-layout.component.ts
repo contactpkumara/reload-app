@@ -85,26 +85,7 @@ export class DashboardLayoutComponent implements OnInit {
   }
 
   public setTaskList() {
-    const resTaskList = JSON.parse(localStorage.getItem('taskList'));
-    resTaskList.forEach(element => {
-      let jsonTask: jsonTaskList = {
-        menuId: '',
-        subMenuId: '',
-        menuName: '',
-        url: ''
-      };
-      jsonTask.menuId = element[0];
-      jsonTask.subMenuId = element[1];
-      jsonTask.menuName = element[2];
-      if (element[2] === 'Mobile Recharge') {
-        jsonTask.url = '/reload-app/mobile';
-      } else if (element[2] === 'Bank Account Statement') {
-        jsonTask.url = '/reload-app/dashboard';
-      } else {
-        jsonTask.url = '/session/404';
-      }
-      this.taskList.push(jsonTask);
-    });
+    this.taskList = JSON.parse(localStorage.getItem('taskList'));
   }
 
 }
