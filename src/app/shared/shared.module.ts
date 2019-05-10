@@ -22,12 +22,21 @@ import {
   MatRippleModule,
   MatDialogModule
 } from '@angular/material';
+import {
+  CarouselModule,
+  NavbarModule,
+  IconsModule,
+  DropdownModule,
+  TooltipModule,
+  ButtonsModule
+} from 'angular-bootstrap-md';
 
 // ALL TIME REQUIRED
 import { AppLoaderComponent } from './services/app-loader/app-loader.component';
 import { AppLoaderService } from './services/app-loader/app-loader.service';
 import { RoutePartsService } from './services/route-parts.service';
 import { ExcelService } from './services/excel.service';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   imports: [
@@ -51,7 +60,14 @@ import { ExcelService } from './services/excel.service';
     MatCardModule,
     MatProgressSpinnerModule,
     MatRippleModule,
-    MatDialogModule
+    MatDialogModule,
+    LayoutModule,
+    CarouselModule,
+    NavbarModule,
+    IconsModule,
+    DropdownModule,
+    TooltipModule,
+    ButtonsModule
   ],
   entryComponents: [
     AppLoaderComponent,

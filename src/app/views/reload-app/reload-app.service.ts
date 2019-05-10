@@ -68,9 +68,19 @@ export class ReloadAppService {
       );
   }
 
-  getUserList(userId) {
+  getUserList(userId, apiUrlKey) {
+    let url = this.baseUrl;
+    if (apiUrlKey === '2') {
+      url += 'fundtransfer/getMasterDistributerList';
+    } else if (apiUrlKey === '3') {
+      url += 'fundtransfer/getDistributerList';
+    } else if (apiUrlKey === '4') {
+      url += 'fundtransfer/getRetailerList';
+    } else {
+      url += 'report/getUserList';
+    }
     return this.http
-      .post<any>(this.baseUrl + 'report/getUserList', userId)
+      .post<any>(url, userId)
       .pipe(
         map(data => {
           return data;

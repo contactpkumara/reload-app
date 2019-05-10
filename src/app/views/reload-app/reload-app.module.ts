@@ -19,7 +19,9 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatRadioModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatTableModule,
+  MatPaginatorModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ReloadAppRoute } from './reload-app-route';
@@ -55,6 +57,8 @@ import { FundTransferComponent } from './fund-transfer/fund-transfer.component';
     MatNativeDateModule,
     MatRadioModule,
     MatAutocompleteModule,
+    MatTableModule,
+    MatPaginatorModule,
     RouterModule.forChild(ReloadAppRoute)
   ],
   providers: [ReloadAppService, DatePipe]

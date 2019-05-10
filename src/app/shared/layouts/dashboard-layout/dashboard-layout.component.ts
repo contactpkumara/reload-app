@@ -13,36 +13,19 @@ import { SharedService } from '../../shared.service';
 })
 export class DashboardLayoutComponent implements OnInit {
 
-  public balance = 0.0;
-  public taskList = [];
-  public adminMsg = 'Message From Admin';
   public dashboard = false;
   public mobile = false;
   public dth = false;
-  public mobileQuery: MediaQueryList;
-  private mobileQueryListener: () => void;
-  public shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
 
   constructor(
     private router: Router,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    private excelService: ExcelService,
     private sharedService: SharedService
-    ) {
-      this.mobileQuery = media.matchMedia('(max-width: 600px)');
-      this.mobileQueryListener = () => changeDetectorRef.detectChanges();
-      this.mobileQuery.addListener(this.mobileQueryListener);
-    }
+    ) {}
 
   ngOnInit() {
     this.changeActiveClass();
-    this.getBalance();
-    this.setTaskList();
-  }
-
-  ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 
   changeActiveClass() {
@@ -68,31 +51,4 @@ export class DashboardLayoutComponent implements OnInit {
     }
   }
 
-  public signOut() {
-    this.sharedService.signOut();
-    this.router.navigate(['session/check-username']);
-  }
-
-  public getBalance() {
-    const userObj = JSON.parse(localStorage.getItem('userObj'));
-    this.sharedService.checkUserBalance(userObj.loginEmployeeId)
-      .subscribe(response => {
-        this.balance = response;
-      },
-      error => {
-        console.log(error);
-      });
-  }
-
-  public setTaskList() {
-    this.taskList = JSON.parse(localStorage.getItem('taskList'));
-  }
-
-}
-
-export interface jsonTaskList {
-  menuId: string;
-  subMenuId: string;
-  menuName: string;
-  url: string;
 }

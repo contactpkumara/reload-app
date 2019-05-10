@@ -14,9 +14,17 @@ import { startWith, map } from 'rxjs/operators';
 export class FundTransferComponent implements OnInit {
 
   public fundTransferForm: FormGroup;
+  public tansferCatForm: FormGroup;
   public userObj = JSON.parse(localStorage.getItem('userObj'));
   public userList: User[] = [];
   public filteredOptions: Observable<User[]>;
+  public disableFormField = true;
+  public selfTr = false;
+  public mDTr = false;
+  public dTr = false;
+  public rTr = false;
+  public selectType = '0';
+  public formFieldName = '';
 
   constructor(
     private fb: FormBuilder,
@@ -27,14 +35,17 @@ export class FundTransferComponent implements OnInit {
 
   ngOnInit() {
     this.buildfundTransferForm();
-    this.getUserList();
+    this.setUserAuthorities();
   }
 
   buildfundTransferForm() {
     this.fundTransferForm = this.fb.group({
-      benificiaryId: ['', Validators.required],
+      benificiaryId: [{value: '', disabled: true}, Validators.required],
       amount: ['', Validators.required],
       remarks: ['', Validators.required]
+    });
+    this.tansferCatForm = this.fb.group({
+      transferCategory: ['', Validators.required]
     });
   }
 
@@ -42,8 +53,11 @@ export class FundTransferComponent implements OnInit {
     this.loader.open('Loading');
     const transferData = this.fundTransferForm.value;
     const filterValue = this._filter(transferData.benificiaryId);
-    transferData.benificiaryId = filterValue[0].userId;
-    console.log(this.fundTransferForm.value);
+    if (this.selectType === '1') {
+      transferData.benificiaryId = this.userObj.loginEmployeeId;
+    } else {
+      transferData.benificiaryId = filterValue[0].userId;
+    }
     transferData.userid = this.userObj.loginEmployeeId;
     this.reloadService.fundTransfer(transferData)
       .subscribe(response => {
@@ -69,13 +83,13 @@ export class FundTransferComponent implements OnInit {
       });
   }
 
-  getUserList() {
+  getUserList(apiUrlKey: number) {
     const userid = this.userObj.loginEmployeeId;
-    this.reloadService.getUserList(userid)
+    this.reloadService.getUserList(userid, apiUrlKey)
       .subscribe(response => {
-        console.log(response);
         this.userList = response;
         this.filterOnInit();
+        this.fundTransferForm.get('benificiaryId').enable();
       },
       error => {
         console.log(error);
@@ -99,6 +113,50 @@ export class FundTransferComponent implements OnInit {
     const filterValue = name.toLowerCase();
 
     return this.userList.filter(user => user.userName.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  loadUserList(event) {
+    this.selectType = event.value;
+    this.fundTransferForm.reset();
+    this.fundTransferForm.markAsUntouched();
+    if (this.selectType === '1') {
+      this.fundTransferForm.get('benificiaryId').disable();
+      this.fundTransferForm.setValue({
+        benificiaryId: this.userObj.loginEmployeeName,
+        amount: '',
+        remarks: ''
+      });
+    } else {
+      if (this.selectType === '2') {
+        this.formFieldName = 'Master Distributor User';
+      } else if (this.selectType === '3') {
+        this.formFieldName = 'Distributor User';
+      } else {
+        this.formFieldName = 'Retailer User';
+      }
+      this.getUserList(event.value);
+    }
+  }
+
+  setUserAuthorities() {
+    const userRole = this.userObj.loginUserTypeId;
+    console.log('userRole - ', userRole);
+    if (userRole === 0) {
+      this.selfTr = true;
+      this.mDTr = true;
+      this.dTr = true;
+      this.rTr = true;
+    } else if (userRole === 1) {
+      this.selfTr = false;
+      this.mDTr = false;
+      this.dTr = true;
+      this.rTr = true;
+    } else {
+      this.selfTr = false;
+      this.mDTr = false;
+      this.dTr = false;
+      this.rTr = true;
+    }
   }
 
 }

@@ -5,9 +5,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
-import { DashboardLayoutComponent } from './shared/layouts/dashboard-layout/dashboard-layout.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule, MatIconModule, MatSidenavModule, MatListModule } from '@angular/material';
+import { MatCardModule, MatIconModule, MatSidenavModule, MatListModule, MatTooltipModule, MatOptionModule, MatSelectModule, MatMenuModule, MatSnackBarModule, MatGridListModule, MatToolbarModule, MatButtonModule, MatRadioModule, MatCheckboxModule, MatProgressSpinnerModule, MatRippleModule, MatDialogModule } from '@angular/material';
 import {
   CarouselModule,
   NavbarModule,
@@ -19,26 +18,51 @@ import {
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { SharedService } from './shared/shared.service';
+import { DashboardLayoutComponent } from './shared/layouts/dashboard-layout/dashboard-layout.component';
+import { MainNavComponent } from './shared/layouts/main-nav/main-nav.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    RouterModule,
     FlexLayoutModule,
-    MatCardModule,
-    NavbarModule,
-    IconsModule,
-    ButtonsModule,
-    MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatTooltipModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    MatGridListModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatRippleModule,
+    MatDialogModule,
+    LayoutModule,
+    CarouselModule,
+    NavbarModule,
+    IconsModule,
+    DropdownModule,
+    TooltipModule,
+    ButtonsModule,
     TooltipModule.forRoot(),
     DropdownModule.forRoot(),
     CarouselModule.forRoot(),

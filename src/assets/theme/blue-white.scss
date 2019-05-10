@@ -8,6 +8,23 @@ $custom-warn:    mat-palette($mat-red, 700, 500, 300);
 $custom-theme: mat-light-theme($custom-primary, $custom-accent, $custom-warn);
 @include angular-material-theme($custom-theme);
 
+html,
+body {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.container {
+    margin-top: 40px !important;
+}
+
 .mat-card-header {
     border-bottom: 1px #F5F5F5 solid;
 }
@@ -17,7 +34,7 @@ $custom-theme: mat-light-theme($custom-primary, $custom-accent, $custom-warn);
 }
 
 #top-bar #navbarCollapse {
-    background: rgb(21, 101, 192);
+    background: #4a6fc5;
     z-index: 1500;
 }
 
@@ -46,4 +63,10 @@ $custom-theme: mat-light-theme($custom-primary, $custom-accent, $custom-warn);
 
 .mat-nav-list .mat-list-item {
     border-bottom: 1px solid #e0e0e0;
+}
+
+table, th , td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    text-align: center !important;
 }

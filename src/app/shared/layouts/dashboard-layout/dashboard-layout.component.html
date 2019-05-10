@@ -1,13 +1,13 @@
 <!--Navbar-->
-<mdb-navbar id="top-bar" SideClass="navbar navbar-expand-sm navbar-dark nav-primary" [containerInside]="false">
+<!-- <mdb-navbar id="top-bar" SideClass="navbar navbar-expand-sm navbar-dark nav-primary" [containerInside]="false"> -->
 
   <!-- Navbar brand -->
-  <links>
+  <!-- <links>
     <span class="navbar-text white-text">
       {{ adminMsg }}
-    </span>
+    </span> -->
     <!-- Links -->
-    <ul class="navbar-nav ml-auto">
+    <!-- <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link waves-light" mdbTooltip="Like Us on Facebook" placement="bottom" mdbWavesEffect>
           <mdb-icon fab icon="facebook"></mdb-icon>
@@ -21,15 +21,15 @@
     </ul>
   </links>
 
-</mdb-navbar>
+</mdb-navbar> -->
 <!--/.Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white sticky-top" [containerInside]="true">
+<!-- <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white sticky-top" [containerInside]="true">
     <mdb-navbar-brand>
       <button type="button" style="padding: 0px;" mdbBtn color="link" (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
       <a class="navbar-brand" routerLink="/reload-app/dashboard">Go Digital Pay</a>
-    </mdb-navbar-brand>
+    </mdb-navbar-brand> -->
     <!-- Collapsible content -->
-  <links>
+  <!-- <links> -->
     <!-- Links -->
     <!-- <ul class="navbar-nav mr-auto">
       <li class="nav-item active" (click)="changeActiveClass()" [class.active]="dashboard">
@@ -44,7 +44,7 @@
     </ul> -->
 
     <!-- Links -->
-    <ul class="navbar-nav ml-auto nav-flex-icons">
+    <!-- <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item mt-6">
           <a class="nav-link">Rs. {{ balance }}</a>
       </li>
@@ -56,23 +56,27 @@
               <a class="dropdown-item waves-light" (click)="signOut()" mdbWavesEffect >Sign out</a>
           </div>
       </li>
-    </ul>
+    </ul> -->
     <!-- Links -->
-  </links>
+  <!-- </links> -->
   <!-- Collapsible content -->
-</mdb-navbar>
+<!-- </mdb-navbar>
 <mat-sidenav-container color="primary" class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
   <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-    <mat-nav-list>
-      <a mat-list-item *ngFor="let item of taskList;" routerLink="{{ (item.pageURL == '') ? '/session/404' :  item.pageURL}}" routerLinkActive="active-list-item">{{ item.taskDesc }}</a>
+    <mat-nav-list> -->
+      <!-- <a mat-list-item *ngFor="let item of taskList;" routerLink="{{ (item.pageURL == '') ? '/session/404' :  item.pageURL}}" routerLinkActive="active-list-item">{{ item.taskDesc }}</a> -->
       <!-- <a mat-list-item routerLink=".">Sidenav Irem 2</a>
       <a mat-list-item routerLink=".">Sidenav Irem 3</a>
       <a mat-list-item routerLink=".">Sidenav Irem 4</a> -->
-    </mat-nav-list>
+    <!-- </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
 <!-- <router-outlet></router-outlet> -->
+
+<app-main-nav>
+  <router-outlet></router-outlet>
+</app-main-nav>

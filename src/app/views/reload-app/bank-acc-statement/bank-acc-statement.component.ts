@@ -11,7 +11,7 @@ import {
   MdbTableDirective
 } from 'angular-bootstrap-md';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { ExcelService } from 'src/app/shared/services/excel.service';
 import { DatePipe } from '@angular/common';
 import { ReloadAppService } from '../reload-app.service';
@@ -26,13 +26,15 @@ export class BankAccStatementComponent implements OnInit {
 
   @ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
-  public elements: any = [];
-  public previous: any = [];
+  public searchObj: any;
   public headElements = ['Date Time', 'User', 'Description', 'Credit', 'Debit', 'Amount', 'Balance', 'Remarks'];
   public searchForm: FormGroup;
   private fromDate = new Date();
   private toDate = new Date();
   public userObj = JSON.parse(localStorage.getItem('userObj'));
+  public dataSource;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -48,21 +50,14 @@ export class BankAccStatementComponent implements OnInit {
     this.toDate.setDate(this.toDate.getDate() - 30);
     const frDate = this.datePipe.transform(this.fromDate, 'yyyy-MM-dd');
     const tDate = this.datePipe.transform(this.toDate, 'yyyy-MM-dd');
-    const searchObj = {
+    this.searchObj = {
       userId: this.userObj.loginEmployeeId,
       transType: 3,
       fromDate: tDate,
       toDate: frDate
-    }
+    };
     this.buildSearchForm();
-    this.searchResult(searchObj);
-  }
-
-  ngAfterViewInit() {
-    this.mdbTablePagination.setMaxVisibleItemsNumberTo(15);
-    this.mdbTablePagination.calculateFirstItemIndex();
-    this.mdbTablePagination.calculateLastItemIndex();
-    this.cdRef.detectChanges();
+    this.searchResult(this.searchObj);
   }
 
   buildSearchForm() {
@@ -74,7 +69,6 @@ export class BankAccStatementComponent implements OnInit {
   }
 
   searchResult(searchObj: any = false) {
-    this.elements = [];
     if (searchObj) {
       searchObj = searchObj;
     } else {
@@ -85,12 +79,10 @@ export class BankAccStatementComponent implements OnInit {
     this.reloadAppService.getAccountStatement(searchObj)
       .subscribe(response => {
         console.log(response);
-        // this.createJsonArray(response);
-        // this.loader.close();
-        this.elements = response;
-        this.mdbTable.setDataSource(this.elements);
-        this.elements = this.mdbTable.getDataSource();
-        this.previous = this.mdbTable.getDataSource();
+        this.loader.close();
+        this.dataSource = new MatTableDataSource(response);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       },
       error => {
         this.loader.close();
@@ -99,25 +91,13 @@ export class BankAccStatementComponent implements OnInit {
   }
 
   exportXlxs() {
-    this.excelService.exportAsExcelFile(this.elements, 'report');
+    this.excelService.exportAsExcelFile(this.dataSource, 'report');
   }
 
-  createJsonArray(dataArray) {
-    dataArray.forEach(element => {
-      const data = {
-        description: element[1],
-        type: element[2],
-        amount: element[4],
-        balance: element[5],
-        remarks: element[6],
-        user: element[7],
-        dateTime: element[8]
-      };
-      this.elements.push(data);
-    });
-    this.mdbTable.setDataSource(this.elements);
-    this.elements = this.mdbTable.getDataSource();
-    this.previous = this.mdbTable.getDataSource();
+  cleatInput() {
+    this.searchForm.reset();
+    this.searchForm.markAsUntouched();
+    this.searchResult(this.searchObj);
   }
 
 }
