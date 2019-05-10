@@ -149,35 +149,35 @@
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 full-width">
                 <ng-container matColumnDef="Date Time">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Time </th>
-                    <td mat-cell *matCellDef="let element"> {{element.transactionDateTime}} </td>
+                    <td mat-cell *matCellDef="let element"> {{(element.transactionDateTime === '') ? '-' : element.transactionDateTime}} </td>
                 </ng-container>
                 <ng-container matColumnDef="User">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
-                    <td mat-cell *matCellDef="let element"> {{element.transactionDoneUser}} </td>
+                    <td mat-cell *matCellDef="let element"> {{(element.transactionDoneUser === '') ? '-' : element.transactionDoneUser}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Description">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-                    <td mat-cell *matCellDef="let element"> {{element.transactionDesc}} </td>
+                    <td mat-cell *matCellDef="let element"> {{(element.transactionDesc === '') ? '-' : element.transactionDesc}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Credit">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Credit </th>
-                    <td mat-cell *matCellDef="let element"> {{element.credit}} </td>
+                    <td mat-cell *matCellDef="let element"> {{(element.credit === '') ? '-' : element.credit}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Debit">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Debit </th>
-                    <td mat-cell *matCellDef="let element"> {{element.debit}} </td>
+                    <td mat-cell *matCellDef="let element"> {{(element.debit === '') ? '-' : element.debit}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Amount">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
-                    <td mat-cell *matCellDef="let element"> {{element.transactionAmount}} </td>
+                    <td mat-cell *matCellDef="let element"> {{(element.transactionAmount === '' || element.transactionAmount === null) ? '-' : element.transactionAmount}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Balance">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
-                    <td mat-cell *matCellDef="let element"> {{element.balance}} </td>
+                    <td mat-cell *matCellDef="let element"> {{(element.balance === '') ? '-' : element.balance}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Remarks">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Remarks </th>
-                    <td mat-cell *matCellDef="let element"> {{element.remarks}} </td>
+                    <td mat-cell *matCellDef="let element"> {{(element.remarks === '') ? '-' : element.balance}} </td>
                 </ng-container>
     
                 <tr mat-header-row *matHeaderRowDef="headElements"></tr>

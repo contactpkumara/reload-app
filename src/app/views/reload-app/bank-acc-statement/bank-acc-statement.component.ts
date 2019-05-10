@@ -26,6 +26,7 @@ export class BankAccStatementComponent implements OnInit {
 
   @ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
+  public elements: any = [];
   public searchObj: any;
   public headElements = ['Date Time', 'User', 'Description', 'Credit', 'Debit', 'Amount', 'Balance', 'Remarks'];
   public searchForm: FormGroup;
@@ -78,7 +79,7 @@ export class BankAccStatementComponent implements OnInit {
     searchObj['userId'] = this.userObj.loginEmployeeId;
     this.reloadAppService.getAccountStatement(searchObj)
       .subscribe(response => {
-        console.log(response);
+        this.elements = response;
         this.loader.close();
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
@@ -91,7 +92,8 @@ export class BankAccStatementComponent implements OnInit {
   }
 
   exportXlxs() {
-    this.excelService.exportAsExcelFile(this.dataSource, 'report');
+    this.excelService.exportAsExcelFile(this.elements, 'report');
+    this.searchForm.markAsUntouched();
   }
 
   cleatInput() {
