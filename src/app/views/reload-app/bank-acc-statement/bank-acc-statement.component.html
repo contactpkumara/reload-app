@@ -1,106 +1,3 @@
-<!-- <div class="container">
-  <div class="row">
-      <div class="col-md-12 mt-5">
-          <mat-card>
-              <mat-card-content>
-                  <form [formGroup]="searchForm">
-                      <div class="row">
-                          <div class="col-md-4">
-                              <mat-form-field class="full-width">
-                                  <mat-select required placeholder="Transaction Type" [formControl]="searchForm.controls['transType']">
-                                      <mat-option value="1">Credit</mat-option>
-                                      <mat-option value="2">Debit</mat-option>
-                                      <mat-option value="3">Both</mat-option>
-                                  </mat-select>
-                              </mat-form-field>
-                          </div>
-                          <div class="col-md-3 full-width">
-                              <mat-form-field class="full-width">
-                                  <input matInput required [matDatepicker]="picker1" placeholder="From Date" [formControl]="searchForm.controls['fromDate']">
-                                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                  <mat-datepicker #picker1></mat-datepicker>
-                              </mat-form-field>
-                          </div>
-                          <div class="col-md-3 full-width">
-                              <mat-form-field class="full-width">
-                                  <input matInput required [matDatepicker]="picker2" placeholder="To Date" [formControl]="searchForm.controls['toDate']">
-                                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                  <mat-datepicker #picker2></mat-datepicker>
-                              </mat-form-field>
-                          </div>
-                          <div class="col-md-1">
-                              <button mat-raised-button color="primary" [disabled]="searchForm.invalid" (click)="searchResult(false)">Search</button>
-                          </div>
-                          <div class="col-md-1">
-                              <button mat-raised-button color="accent" (click)="exportXlxs()">Export</button>
-                          </div>
-                      </div>
-                  </form>
-              </mat-card-content>
-          </mat-card>
-      </div>
-      <div class="col-md-12 mt-3">
-          <table mdbTable #tableEl="mdbTable" class="z-depth-1">
-              <thead>
-                  <tr>
-                        <th [mdbTableSort]="elements" sortBy="transactionDateTime">
-                            Date Time
-                            <mdb-icon fas icon="sort"></mdb-icon>
-                        </th>
-                        <th [mdbTableSort]="elements" sortBy="transactionDoneUser">
-                            User
-                            <mdb-icon fas icon="sort"></mdb-icon>
-                        </th>
-                        <th [mdbTableSort]="elements" sortBy="transactionDesc">
-                            Description
-                            <mdb-icon fas icon="sort"></mdb-icon>
-                        </th>
-                        <th [mdbTableSort]="elements" sortBy="credit">
-                            Credit
-                            <mdb-icon fas icon="sort"></mdb-icon>
-                        </th>
-                        <th [mdbTableSort]="elements" sortBy="debit">
-                            Debit
-                            <mdb-icon fas icon="sort"></mdb-icon>
-                        </th>
-                         <th [mdbTableSort]="elements" sortBy="transactionAmount">
-                            Amount
-                            <mdb-icon fas icon="sort"></mdb-icon>
-                        </th> 
-                        <th [mdbTableSort]="elements" sortBy="balance">
-                            Balance
-                            <mdb-icon fas icon="sort"></mdb-icon>
-                        </th>
-                        <th [mdbTableSort]="elements" sortBy="remarks">
-                            Remarks
-                            <mdb-icon fas icon="sort"></mdb-icon>
-                        </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let el of elements; let i = index">
-                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionDateTime}}</td>
-                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionDoneUser}}</td>
-                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionDesc}}</td>
-                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.credit}}</td>
-                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.debit}}</td>
-                       <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionAmount}}</td> 
-                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.balance}}</td>
-                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.remarks}}</td>
-                  </tr>
-              </tbody>
-              <tfoot class="grey lighten-5 w-100">
-                  <tr>
-                      <td colspan="4">
-                      <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
-                      </td>
-                  </tr>
-              </tfoot>
-          </table>
-      </div>
-  </div>
-</div> -->
-
 <div class="container">
     <mat-card>
         <mat-card-content class="mt-4">
@@ -146,44 +43,70 @@
     </mat-card>
     <mat-card>
         <mat-card-content>
-            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 full-width">
-                <ng-container matColumnDef="Date Time">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Time </th>
-                    <td mat-cell *matCellDef="let element"> {{(element.transactionDateTime === '') ? '-' : element.transactionDateTime}} </td>
-                </ng-container>
-                <ng-container matColumnDef="User">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
-                    <td mat-cell *matCellDef="let element"> {{(element.transactionDoneUser === '') ? '-' : element.transactionDoneUser}} </td>
-                </ng-container>
-                <ng-container matColumnDef="Description">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-                    <td mat-cell *matCellDef="let element"> {{(element.transactionDesc === '') ? '-' : element.transactionDesc}} </td>
-                </ng-container>
-                <ng-container matColumnDef="Credit">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Credit </th>
-                    <td mat-cell *matCellDef="let element"> {{(element.credit === '') ? '-' : element.credit}} </td>
-                </ng-container>
-                <ng-container matColumnDef="Debit">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Debit </th>
-                    <td mat-cell *matCellDef="let element"> {{(element.debit === '') ? '-' : element.debit}} </td>
-                </ng-container>
-                <ng-container matColumnDef="Amount">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
-                    <td mat-cell *matCellDef="let element"> {{(element.transactionAmount === '' || element.transactionAmount === null) ? '-' : element.transactionAmount}} </td>
-                </ng-container>
-                <ng-container matColumnDef="Balance">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
-                    <td mat-cell *matCellDef="let element"> {{(element.balance === '') ? '-' : element.balance}} </td>
-                </ng-container>
-                <ng-container matColumnDef="Remarks">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Remarks </th>
-                    <td mat-cell *matCellDef="let element"> {{(element.remarks === '') ? '-' : element.balance}} </td>
-                </ng-container>
-    
-                <tr mat-header-row *matHeaderRowDef="headElements"></tr>
-                <tr mat-row *matRowDef="let row; columns: headElements;"></tr>
+            <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+                <thead>
+                    <tr>
+                        <th [mdbTableSort]="elements" sortBy="id">
+                            Date Time
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="id">
+                            User
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="id">
+                            Description
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="id">
+                            Credit
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="id">
+                            Debit
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="first.nick">
+                            Amount
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="last">
+                            Balance
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="elements" sortBy="handle">
+                            Remarks
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let el of elements; let i = index">
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionDateTime}}</th>
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionDoneUser}}</th>
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionDesc}}</th>
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.credit}}</th>
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.debit}}</th>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.transactionAmount}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.balance}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.remarks}}</td>
+                    </tr>
+                </tbody>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100" style="text-align: center !important;">
+                    <mat-form-field class="pl-2">
+                        <mat-select [(value)]="selected" (selectionChange)="setPaginationPageSize($event.value)" placeholder="Page Size">
+                            <mat-option value="5">5</mat-option>
+                            <mat-option value="10">10</mat-option>
+                            <mat-option value="20">20</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50">
+                    <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+                </div>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

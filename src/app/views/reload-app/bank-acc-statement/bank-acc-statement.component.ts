@@ -27,15 +27,14 @@ export class BankAccStatementComponent implements OnInit {
   @ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
   public elements: any = [];
+  public previous: any = [];
   public searchObj: any;
   public headElements = ['Date Time', 'User', 'Description', 'Credit', 'Debit', 'Amount', 'Balance', 'Remarks'];
   public searchForm: FormGroup;
   private fromDate = new Date();
   private toDate = new Date();
   public userObj = JSON.parse(localStorage.getItem('userObj'));
-  public dataSource;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  public selected = '5';
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -81,9 +80,10 @@ export class BankAccStatementComponent implements OnInit {
       .subscribe(response => {
         this.elements = response;
         this.loader.close();
-        this.dataSource = new MatTableDataSource(response);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+        this.mdbTable.setDataSource(this.elements);
+        this.elements = this.mdbTable.getDataSource();
+        this.previous = this.mdbTable.getDataSource();
+        this.setPaginationPageSize(5);
       },
       error => {
         this.loader.close();
@@ -100,6 +100,14 @@ export class BankAccStatementComponent implements OnInit {
     this.searchForm.reset();
     this.searchForm.markAsUntouched();
     this.searchResult(this.searchObj);
+  }
+
+  setPaginationPageSize(pageSize) {
+    console.log(pageSize);
+    this.mdbTablePagination.setMaxVisibleItemsNumberTo(pageSize);
+    this.mdbTablePagination.calculateFirstItemIndex();
+    this.mdbTablePagination.calculateLastItemIndex();
+    this.cdRef.detectChanges();
   }
 
 }
