@@ -1,0 +1,127 @@
+<div class="back-img">
+  <div class="container">
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+      <div fxFlex="100">
+        <mat-card>
+          <mat-card-header class="text-center" color="primary">
+            <mat-card-title class="ml-0 text-center">Create Master Distributer</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="mt-2">
+            <form [formGroup]="createMasterDistributor">
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pr-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['masterDistName']" name="retailer-name" type="text" placeholder="Master Destributer Name">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5 pr-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['proprietorName']" name="proprietor-name" type="text" placeholder="Proprietor Name">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['proprietorMobile']" name="proprietor-mobile" type="text" placeholder="Proprietor Mobile">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pr-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['proprietorMail']" name="proprietor-mail" type="email" placeholder="Proprietor Mail" email>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5 pr-5">
+                    <mat-select required [formControl]="createMasterDistributor.controls['stateId']" (selectionChange)="getDistrictList($event.value)" name="state-id" placeholder="State">
+                      <mat-option *ngFor="let state of stateList;" value="{{state.stateId}}">{{state.stateDesc}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5">
+                    <mat-select required [formControl]="createMasterDistributor.controls['districtId']" (selectionChange)="getCityList($event.value)" name="district-id" placeholder="District">
+                      <mat-option *ngFor="let district of destrictList;" value="{{district.districtId}}">{{district.districtDescription}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pr-5">
+                    <mat-select required [formControl]="createMasterDistributor.controls['cityId']" name="city-id" placeholder="City">
+                      <mat-option *ngFor="let city of cityList;" value="{{city.cityId}}">{{city.cityDescription}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5 pr-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['address']" name="address" type="text" placeholder="Address">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['pincode']" name="pin-code" type="text" placeholder="Pin Code">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pr-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['latitude']" name="latitude" type="text" placeholder="Latitude">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5 pr-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['longitude']" name="longitude" type="text" placeholder="Longitude">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['altitude']" name="altitude" type="text" placeholder="Altitude">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pr-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['userName']" name="user-name" type="text" placeholder="User Name">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5 pr-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['password']" name="password" type="password" placeholder="Password">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100/3">
+                  <mat-form-field class="full-width pl-5">
+                    <input matInput required [formControl]="createMasterDistributor.controls['retFlag']" name="ret-flag" type="text" placeholder="Flag">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="left">
+                <div fxFlex="100">
+                  <mat-form-field class="full-width">
+                    <textarea matInput required [formControl]="createMasterDistributor.controls['retMsg']" name="ret-msg"  placeholder="Message"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+          <mat-card-actions class="mb-1">
+            <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+              <div fxFlex="100">
+                <button mat-raised-button color="primary" [disabled]="createMasterDistributor.invalid" (click)="createMasterDistributer()" style="width: 100%;">Create Master Ditributer</button>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

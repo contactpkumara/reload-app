@@ -89,6 +89,72 @@ export class ReloadAppService {
       );
   }
 
+  getStateList(userId) {
+    return this.http
+      .post<any>(this.baseUrl + 'commondetails/getstatelist', userId)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  getDistrictLit(disData) {
+    return this.http
+      .post<any>(this.baseUrl + 'commondetails/getdistrictlist', disData)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  getCityList(cityData) {
+    return this.http
+      .post<any>(this.baseUrl + 'commondetails/getcitylist', cityData)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  createRetailer(retailerData) {
+    return this.http
+      .post<any>(this.baseUrl + 'save/retailer', retailerData)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  createDestributor(destributorData) {
+    return this.http
+      .post<any>(this.baseUrl + 'save/distributer', destributorData)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  createMasterDestributor(masterDestributorData) {
+    return this.http
+      .post<any>(this.baseUrl + 'save/masterdistributer', masterDestributorData)
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse | any) {
     return throwError(error);
   }

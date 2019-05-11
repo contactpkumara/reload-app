@@ -21,7 +21,8 @@ import {
   MatRadioModule,
   MatAutocompleteModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatSortModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ReloadAppRoute } from './reload-app-route';
@@ -32,9 +33,20 @@ import { ReloadAppService } from './reload-app.service';
 import { DthReloadComponent } from './dth-reload/dth-reload.component';
 import { BankAccStatementComponent } from './bank-acc-statement/bank-acc-statement.component';
 import { FundTransferComponent } from './fund-transfer/fund-transfer.component';
+import { CreateRetailerComponent } from './create-retailer/create-retailer.component';
+import { CreateDestributorComponent } from './create-destributor/create-destributor.component';
+import { CreateMasterDestributorComponent } from './create-master-destributor/create-master-destributor.component';
 
 @NgModule({
-  declarations: [MobileComponent, DthReloadComponent, BankAccStatementComponent, FundTransferComponent],
+  declarations: [
+    MobileComponent,
+    DthReloadComponent,
+    BankAccStatementComponent,
+    FundTransferComponent,
+    CreateRetailerComponent,
+    CreateDestributorComponent,
+    CreateMasterDestributorComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -59,6 +71,7 @@ import { FundTransferComponent } from './fund-transfer/fund-transfer.component';
     MatAutocompleteModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     RouterModule.forChild(ReloadAppRoute)
   ],
   providers: [ReloadAppService, DatePipe]

@@ -36,6 +36,7 @@ import { AppLoaderComponent } from './services/app-loader/app-loader.component';
 import { AppLoaderService } from './services/app-loader/app-loader.service';
 import { RoutePartsService } from './services/route-parts.service';
 import { ExcelService } from './services/excel.service';
+import { LocationService } from './services/location.service';
 import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
@@ -75,7 +76,8 @@ import { LayoutModule } from '@angular/cdk/layout';
   providers: [
     AppLoaderService,
     RoutePartsService,
-    ExcelService
+    ExcelService,
+    LocationService
   ],
   declarations: [
       AppLoaderComponent

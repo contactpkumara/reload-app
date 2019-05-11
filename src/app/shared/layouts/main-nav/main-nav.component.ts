@@ -44,7 +44,7 @@ export class MainNavComponent {
         this.balance = response;
       },
       error => {
-        console.log(error);
+        // console.log(error);
       });
   }
 
