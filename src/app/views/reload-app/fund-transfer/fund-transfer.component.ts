@@ -52,18 +52,26 @@ export class FundTransferComponent implements OnInit {
   fundTransfer() {
     this.loader.open('Loading');
     const transferData = this.fundTransferForm.value;
-    const filterValue = this._filter(transferData.benificiaryId);
     if (this.selectType === '1') {
       transferData.benificiaryId = this.userObj.loginEmployeeId;
     } else {
-      transferData.benificiaryId = filterValue[0].userId;
+      const filterValue = this._filter(transferData.benificiaryId);
+      transferData.benificiaryId = filterValue[0].id;
     }
     transferData.userid = this.userObj.loginEmployeeId;
+    // console.log(transferData);
     this.reloadService.fundTransfer(transferData)
       .subscribe(response => {
         this.loader.close();
         this.fundTransferForm.reset();
         this.fundTransferForm.markAsUntouched();
+        if (this.selectType === '1') {
+          this.fundTransferForm.setValue({
+            benificiaryId: this.userObj.loginEmployeeName,
+            amount: '',
+            remarks: ''
+          });
+        }
         this.snackBar.open(
           response.retMsg,
           'close',
@@ -73,13 +81,15 @@ export class FundTransferComponent implements OnInit {
       error => {
         this.loader.close();
         this.fundTransferForm.reset();
+        this.tansferCatForm.reset();
         this.fundTransferForm.markAsUntouched();
+        this.tansferCatForm.markAsUntouched();
         this.snackBar.open(
           'Somthing went wrong, Please try again!',
           'close',
           { duration: 3000 }
         );
-        console.log(error);
+        // console.log(error);
       });
   }
 
@@ -92,7 +102,7 @@ export class FundTransferComponent implements OnInit {
         this.fundTransferForm.get('benificiaryId').enable();
       },
       error => {
-        console.log(error);
+        // console.log(error);
       });
   }
 
@@ -106,13 +116,13 @@ export class FundTransferComponent implements OnInit {
   }
 
   displayFn(user?: User): string | undefined {
-    return user ? user.userName : undefined;
+    return user ? user.name : undefined;
   }
 
   private _filter(name: any): User[] {
     const filterValue = name.toLowerCase();
 
-    return this.userList.filter(user => user.userName.toLowerCase().indexOf(filterValue) === 0);
+    return this.userList.filter(user => user.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   loadUserList(event) {
@@ -140,12 +150,12 @@ export class FundTransferComponent implements OnInit {
 
   setUserAuthorities() {
     const userRole = this.userObj.loginUserTypeId;
-    console.log('userRole - ', userRole);
+    // console.log('userRole - ', userRole);
     if (userRole === 0) {
       this.selfTr = true;
       this.mDTr = true;
       this.dTr = true;
-      this.rTr = true;
+      this.rTr = false;
     } else if (userRole === 1) {
       this.selfTr = false;
       this.mDTr = false;
@@ -162,6 +172,6 @@ export class FundTransferComponent implements OnInit {
 }
 
 export interface User {
-  userId: string;
-  userName: string;
+  id: string;
+  name: string;
 }

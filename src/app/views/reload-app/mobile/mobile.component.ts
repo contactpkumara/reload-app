@@ -58,7 +58,7 @@ export class MobileComponent implements OnInit {
           'close',
           { duration: 3000 }
         );
-        console.log(error);
+        // console.log(error);
       });
   }
 
@@ -74,7 +74,7 @@ export class MobileComponent implements OnInit {
         this.convertArrayToJson(response);
       },
       error => {
-        console.log(error);
+        // console.log(error);
       });
   }
 

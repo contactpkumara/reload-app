@@ -61,7 +61,7 @@
     </div>
   </div> -->
   <div class="container">
-    <mat-card>
+    <!-- <mat-card>
       <mat-card-content>
         <form [formGroup]="tansferCatForm">
           <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
@@ -76,7 +76,7 @@
           </div>
         </form>
       </mat-card-content>
-    </mat-card>
+    </mat-card> -->
     <div class="row pt-5">
       <div class="col-md-4">
         <mat-card>
@@ -84,14 +84,26 @@
             <mat-card-title class="ml-0 text-center">Fund Transfer</mat-card-title>
           </mat-card-header>
           <mat-card-content class="mt-2">
+            <form [formGroup]="tansferCatForm">
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+                <div fxFlex="100">
+                  <mat-radio-group class="full-width" aria-label="Select an option" layout="row">
+                    <mat-radio-button (change)="loadUserList($event)" class="mr-right" *ngIf="selfTr" value="1">Self Transfer</mat-radio-button>
+                    <mat-radio-button (change)="loadUserList($event)" class="mr-right" *ngIf="mDTr" value="2">Master Distributors</mat-radio-button>
+                    <mat-radio-button (change)="loadUserList($event)" class="mr-right" *ngIf="dTr" value="3">Distributors</mat-radio-button>
+                    <mat-radio-button (change)="loadUserList($event)" class="mr-right" *ngIf="rTr" value="4">Retailers</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </form>
             <form [formGroup]="fundTransferForm">
               <div class="mlr-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
                 <div fxFlex="100">
                   <mat-form-field class="full-width" *ngIf="selectType > '1'">
                     <input type="text" placeholder="{{formFieldName}}" aria-label="Assignee" matInput [formControl]="fundTransferForm.controls['benificiaryId']" [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn()">
-                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
-                        {{option.userName}}
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+                        {{option.name}}
                       </mat-option>
                     </mat-autocomplete>
                   </mat-form-field>
