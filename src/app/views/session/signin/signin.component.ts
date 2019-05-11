@@ -40,15 +40,15 @@ export class SigninComponent implements OnInit {
   }
 
   signin() {
-    console.log(this.signinForm.value);
+    // console.log(this.signinForm.value);
     this.loader.open('Loading');
     this.sessionService.signin(this.signinForm.value)
       .subscribe(response => {
-        console.log(response.username);
+        // console.log(response.username);
         this.sessionService.getUserTaskList(response.loginEmployeeId)
         .subscribe(res => {
-          console.log('taskList');
-          console.log(res);
+          // console.log('taskList');
+          // console.log(res);
           localStorage.setItem('userObj', JSON.stringify(response));
           localStorage.setItem('taskList', JSON.stringify(res));
           this.loader.close();

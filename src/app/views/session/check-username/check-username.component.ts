@@ -35,7 +35,7 @@ export class CheckUsernameComponent implements OnInit {
   }
 
   checkUserName() {
-    console.log(this.checkUserNameForm.value);
+    // console.log(this.checkUserNameForm.value);
     const extraParam: NavigationExtras = {
       queryParams: {
         userName: this.checkUserNameForm.value.userName
@@ -46,7 +46,7 @@ export class CheckUsernameComponent implements OnInit {
       .subscribe(response => {
         this.loader.close();
         if (response.retFlag === '0') {
-          console.log(response);
+          // console.log(response);
           this.router.navigate([this.successUrl], extraParam);
         } else {
           this.errorMessage = response.retMsg;
